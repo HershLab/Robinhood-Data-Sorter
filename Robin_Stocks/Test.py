@@ -35,7 +35,7 @@ def historical_stock():
             ws.write(row,col,_value)
         row+=1 #enter the next row
     wb.close()
-    println("Done!")
+    print("Done!")
 
 
 def historical_options():

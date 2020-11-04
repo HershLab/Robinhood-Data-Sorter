@@ -13,7 +13,7 @@ def login ():
 
 def historical_stock():
     ticker = input("Enter ticker: ")
-    file_name = input("Please enter the file name. Include .xlsx at the end of the file name: ")
+    file_name = input("Enter the file name. Include .xlsx at the end of the file name: ")
 
     final_list = []
     final_list = r.get_stock_historicals(ticker, interval= '5minute',span= 'week', bounds= 'regular', info = None)
@@ -39,8 +39,27 @@ def historical_stock():
 
 
 def historical_options():
-    print("placeholder")
+    ticker = input("Enter ricker: ")
+    expiration_date = input("Enter expiration date: ")
+    strike_price = input("Enter the price of the option: ")
+    option_type = input("Enter call or put. Double check spelling.")
+    file_name = input("Enter the file name. Include .xlsx at the end of the file name: ")
 
+    final_list = []
+    final_list = r.get_option_historicals(ticker, expiration_date, strike_price, option_type, intervval = '5minute', span = 'week', bounds = 'regular', info = None)
+    
+    #ordered_list = ["time", "url", "instrument", "execution_date", "multiplier", "divisor"]
+
+    wb = Workbook(file_name)
+    ws = wb.add_worksheet("Ticker")
+
+    first_row = 0
+    for player in final_list:
+        for _key, _value in player.items():
+            ws.write(row,col,_value)
+        row+=1
+    wb.close()
+    print("Done!")
 login()
 answererd = True
 while(answererd == True):

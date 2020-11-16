@@ -39,14 +39,14 @@ def historical_stock():
 
 
 def historical_options():
-    ticker = input("Enter ricker: ")
+    ticker = input("Enter ticker: ")
     expiration_date = input("Enter expiration date: ")
     strike_price = input("Enter the price of the option: ")
-    option_type = input("Enter call or put. Double check spelling.")
+    option_type = input("Enter call or put. Double check spelling: s")
     file_name = input("Enter the file name. Include .xlsx at the end of the file name: ")
 
     final_list = []
-    final_list = r.get_option_historicals(ticker, expiration_date, strike_price, option_type, intervval = '5minute', span = 'week', bounds = 'regular', info = None)
+    final_list = r.get_option_historicals(ticker, expiration_date, strike_price, option_type, interval = '5minute', span = 'week', bounds = 'regular', info = None)
     
     #ordered_list = ["time", "url", "instrument", "execution_date", "multiplier", "divisor"]
 

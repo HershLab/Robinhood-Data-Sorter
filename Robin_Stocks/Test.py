@@ -1,5 +1,6 @@
 import robin_stocks as r
 from xlsxwriter import Workbook
+import datetime as dt
 
 
 def login ():
@@ -40,30 +41,28 @@ def historical_stock():
 
 def historical_options():
     ticker = input("Enter ticker: ")
+    ticker_name = r.get_name_by_symbol(ticker)
+    print(ticker_name)
     expiration_date = input("Enter expiration date: ")
     strike_price = input("Enter the price of the option: ")
-    option_type = input("Enter call or put. Double check spelling: s")
+    option_type = input("Enter call or put. Double check spelling: ")
+    interval = 'hour'
+    span = 'week'
+    bounds = 'regular'
+    info = None
     file_name = input("Enter the file name. Include .xlsx at the end of the file name: ")
 
-    final_list = []
-    final_list = r.get_option_historicals(ticker, expiration_date, strike_price, option_type, interval = '5minute', span = 'week', bounds = 'regular', info = None)
+    #final_list = []
+    final_list = r.get_option_historicals(ticker, expiration_date, strike_price, option_type, interval, span, bounds, info)
     
+    return final_list
+
     #ordered_list = ["time", "url", "instrument", "execution_date", "multiplier", "divisor"]
 
-    wb = Workbook(file_name)
-    ws = wb.add_worksheet("Ticker")
-
-    first_row = 0
-    for player in final_list:
-        for _key, _value in player.items():
-            ws.write(row,col,_value)
-        row+=1
-    wb.close()
-    print("Done!")
 login()
 answererd = True
 while(answererd == True):
-    answer = input("What would you like to do? 1. get stock historical, 2. get options historical, 3. exit (enter corresponding number): ")
+    answer = input("What would you like to do? 1. get stock historical, 3. exit (enter corresponding number): ")
     if(answer == '1'):
         historical_stock()
     elif (answer == '2'):
